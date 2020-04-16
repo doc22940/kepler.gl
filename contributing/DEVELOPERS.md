@@ -263,13 +263,21 @@ Setup ```gh-release``` with your github api token ([instructions](https://www.np
 
 ### Push a new release
 In order to publish a new version of kepler.gl a developer must perform the following steps:
-1. Update __package.json__ file with the new version value.
-2. Update each of the example folder package.json kepler.gl dependency with the newer version specified during step 1.
-3. Update __CHANGELOG.md__ with the latest commit changes.
-4. Create a new PR for review.
-5. Once the PR is reviewed and merged, pull the latest changes locally.
-6. Run ```gh-release```: this command will create a new Github Release with the new updated CHANGELOG.md section.
-7. Once the new Github Release is created, Github will automatically trgger a new Github Action flow that will automatically build and publish the new package version to NPM registry.
+1. Update __package.json__ file with the new version value. Run ```npm version major | minor | patch``` to update version accordingly.
+2. Update __CHANGELOG.md__ with the latest commit changes. Print commits with ```git log --pretty=oneline --abbrev-commit```
+3. Create a new PR for review.
+4. Once the PR is reviewed and merged, pull the latest changes locally.
+5. Run ```gh-release```: this command will create a new Github Release with the new updated CHANGELOG.md section.
+6. Once the new Github Release is created, Github will automatically trgger a new Github Action flow that will automatically build and publish the new package version to NPM registry.
+
+__After Release is completed and pushed__
+* Update each of the example folder package.json kepler.gl dependency with the newer. To update all examples, run
+```bash
+npm run example-version
+```
+
+This step is required after the new version is published otherwise it would fail.
+
 
 [demo-app]: http://kepler.gl/#/demo
 [documentationjs]: https://documentation.js.org/
